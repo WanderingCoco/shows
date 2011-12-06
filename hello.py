@@ -1,21 +1,27 @@
+#!/usr/bin/env python
 
-terms = ['california', 'ca', 'san francisco', 'oakland']
+#import postgres 
 
-import urllib
-f = urllib.urlopen("http://www.hiromiuehara.com/en/tour/index.html")
+terms = ['california', ', ca', ',ca', 'san francisco', 'oakland']
 
-page = f.read()
+urls = ["http://www.hiromiuehara.com/en/tour/index.html", "http://www.greyboyallstars.com/tour.php"]
 
-pagelower = page.lower()
+for url in urls: 
+	import urllib
+	f = urllib.urlopen(url)
 
-found = False
+	page = f.read()
 
-for term in terms:
-	if term in pagelower:
-		found = True
+	pagelower = page.lower()
 
-if found:
-	print "hooray"
+	found = False
+
+	for term in terms:
+		if term in pagelower:
+			found = True
+
+	if found:
+		print "hooray", url
 
 #fetch http://www.hiromiuehara.com/en/tour/index.html
 #scan for 
@@ -24,3 +30,4 @@ if found:
 #- san francisco
 #- oakland
 #if found, print
+
